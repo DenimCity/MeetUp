@@ -5,7 +5,6 @@ const router = express.Router()
 
 
 router.get('/', async (request,response)=> {
-  console.log('hit the meetups route ')
   try {
     const meetups = await MeetUp.find({})
     console.log('all created meetups ',meetups)
@@ -16,8 +15,6 @@ router.get('/', async (request,response)=> {
 })
 
 router.post('/', async (request,response)=>{
-  console.log('hit the create meetup route');
-
   try {
     const newMeetUp = await MeetUp.create(request.body)
     console.log('new meetup data', newMeetUp);
