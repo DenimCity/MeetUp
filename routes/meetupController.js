@@ -1,0 +1,31 @@
+const express = require('express')
+const MeetUp = require('../db/models/MeetUp')
+const router = express.Router()
+
+
+
+router.get('/', async (request,response)=> {
+  console.log('hit the meetups route ')
+  try {
+    const meetups = await MeetUp.find({})
+    console.log('all created meetups ',meetups)
+    response.json(meetups)
+  } catch (error) {
+    console.log('error getting meetups ',error)
+  }
+})
+
+router.post('/', async (request,response)=>{
+  console.log('hit the create meetup route');
+
+  try {
+    const newMeetUp = await MeetUp.create(request.body)
+    console.log('new meetup data', newMeetUp);
+    response.json(newMeetUp)
+    
+  } catch (error) {
+    response.json('couldnt post route', error)
+  }
+} )
+
+module.exports = router
