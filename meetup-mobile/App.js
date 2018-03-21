@@ -11,11 +11,11 @@ export default class App extends React.Component {
 
 
   async componentDidMount() {
+    this.setState({loading: true})
     const data = await axios.get('http://10.1.6.50:4000/meetup/')
     .then(response => {
       const meetups = response.data
-      this.setState({meetups})
-      console.log('the state is  ',this.state);
+      setTimeout(()=> this.setState({loading: false, meetups}), 300)
     } )
 
   }
