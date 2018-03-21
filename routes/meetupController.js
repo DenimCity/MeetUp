@@ -7,7 +7,7 @@ const router = express.Router()
 router.get('/', async (request,response)=> {
   try {
     const meetups = await MeetUp.find({})
-    response.json({meetups: meetups })
+    response.json(meetups)
   } catch (error) {
     console.log('error getting meetups ',error)
   }
@@ -16,7 +16,7 @@ router.get('/', async (request,response)=> {
 router.post('/', async (request,response)=>{
   try {
     const newMeetUp = await MeetUp.create(request.body)
-    response.json({MeetUpCreated: newMeetUp})
+    response.json(newMeetUp)
   } catch (error) {
     response.json('couldnt post route', error)
   }
