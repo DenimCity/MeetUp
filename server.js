@@ -24,9 +24,10 @@ app.use(bodyParser.json());
 
 
 const meetup = require('./routes/meetupController')
-app.use('/meetup/', meetup)
+app.use('/groups/:groupId/meetup', meetup)
 
-
+const group = require('./routes/groupController')
+app.use('/groups/', group)
 
 app.use(express.static(__dirname + '/client/build/'));
 app.get('*', (req,res) => {
