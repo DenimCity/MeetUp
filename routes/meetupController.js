@@ -50,7 +50,6 @@ router.get('/:meetUpId', async(request, response) => {
 
 //to delete meetup
 router.delete('/:meetUpId/', async(request, response) => {
-  console.clear()
   try {
     const groupId = request.params.groupId
     const meetupId = request.params.meetUpId
