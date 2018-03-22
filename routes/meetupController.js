@@ -1,47 +1,70 @@
 const express = require('express')
+const Group = require('../db/models/Group')
 const MeetUp = require('../db/models/MeetUp')
-const router = express.Router()
+const router = express.Router({mergeParams: true})
 
-
-
-router.get('/', async (request,response)=> {
+//to get all the meetup affilitate with group
+router.get('/', async(request, response) => {
   try {
-    const meetups = await MeetUp.find({})
+    const groupId = request.params.groupId
+    const group = await Group.findById(groupId)
+    const meetups = await group.meetup
     response.json(meetups)
+  } catch (error) {}
+  console.log(error)
+})
+
+router.post('/', async(request, response) => {
+  try {
+    const group = await Group.findById(request.params.groupId)
+    const newMeetUp = request.body
+    group
+      .meetup
+      .push(newMeetUp)
+    const saved = await group.save()
+    response.json('meetup saved')
   } catch (error) {
-    console.log('error getting meetups ',error)
+
+    response.json({
+      error: 'could not create new meetup: title is required & must be unique, name must be 5 c' +
+          'harcters long description is requried, Description must be 10 charcters long'
+    })
+    
   }
 })
 
-router.post('/', async (request,response)=>{
+// get metup Id
+router.get('/:meetUpId', async(request, response) => {
   try {
-    const newMeetUp = await MeetUp.create(request.body)
-    response.json(newMeetUp)
-  } catch (error) {
-    response.json('couldnt post route', error)
-  }
-} )
-
-
-//to get one specific meetup
-router.get('/:id', async (request, response) => {
-  const meetupId = request.params.id
-  try {
-    const meetup = await MeetUp.findById(meetupId)
+    const groupId = request.params.groupId
+    const meetupId = request.params.meetUpId
+    const group = await Group.findById(groupId)
+    const meetup = await group
+      .meetup
+      .id(meetupId)
     response.json(meetup)
   } catch (error) {
-    console.log(`to get one pecific meetup route error ${error}`);
+    console.log(error, 'error grabbing meetupId')
   }
 })
 
-router.delete('/:id/delete', async (request, response) =>{
-  const meetupId = request.params.id
+//to delete meetup
+router.delete('/:meetUpId/', async(request, response) => {
+  console.clear()
   try {
-    const meetup = await MeetUp.findByIdAndRemove(meetupId)
-    response.json('meetup deleted')
+    const groupId = request.params.groupId
+    const meetupId = request.params.meetUpId
+    const group = await Group.findById(groupId)
+    meetup = group
+      .meetup
+      .id(meetupId)
+
+    meetup.remove()
+    group.save()
+    response.json('deleted meetup')
   } catch (error) {
-    console.log('couldnt delete', error)
+    console.log(error, 'error deleting meetupId')
   }
-}) 
+})
 
 module.exports = router
