@@ -24,12 +24,12 @@ const GroupSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    min: [5, "name must be at least  5 charcters long"]
+    // min: [2, "name must be at least  5 charcters long"]
   },
   description: {
     type: String,
     required: true,
-    min: [10, "Description must be 10 charcters long"]
+    // min: [2, "Description must be 10 charcters long"]
   },
   category: {
     type: String
@@ -38,7 +38,8 @@ const GroupSchema = new Schema({
 }, {timestamps: true})
 
 module.exports = {
-  MeetUpSchema,
-  GroupSchema
+  GroupSchema,
+  MeetUpSchema
+  
 
 }
