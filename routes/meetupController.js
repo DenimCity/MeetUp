@@ -1,6 +1,5 @@
 const express = require('express')
 const Group = require('../db/models/Group')
-const MeetUp = require('../db/models/MeetUp')
 const router = express.Router({mergeParams: true})
 
 //to get all the meetup affilitate with group
@@ -67,3 +66,4 @@ router.delete('/:meetUpId/', async(request, response) => {
 })
 
 module.exports = router
+
