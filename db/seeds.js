@@ -32,7 +32,7 @@ Technology
 
 const Running = new Group({name: "Health", description: "Everything Health", category: "Health"})
 const meetup4 = new MeetUp({title: " Atlanta Run CLub ", description: "Midtown Runners Unite"})
-const meetup5 = new MeetUp({title: " General Assembly Fitness ", description: "Coding BootCAmp grads mixing it up code with fitness"})
+const meetup5 = new MeetUp({title: " General Assembly Fitness ", description: "Coding BootCamp Grads mixing it up code with fitness"})
 const meetup6 = new MeetUp({title: " Sneaker Fitness ", description: "Sneaker Heads That Love Fitness"})
 
 Running
