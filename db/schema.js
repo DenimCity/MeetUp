@@ -3,11 +3,10 @@ const Schema = mongoose.Schema
 mongoose.Promise = global.Promise
 
 const MeetUpSchema = new Schema({
-  title: {
+  title: { 
     type: String,
     required: true,
-    unique: true,
-    min: [5, 'title must be at least 5 character long']
+    min: [5, 'title must be at least 5 character long'],
   },
   description: {
     type: String,
@@ -20,21 +19,21 @@ const MeetUpSchema = new Schema({
 }, {timestamps: true})
 
 const GroupSchema = new Schema({
-  title: {
+  name: {
     type: String,
     required: true,
     unique: true,
-    // min: [2, "name must be at least  5 charcters long"]
+    min: [2, "name must be at least  5 charcters long"]
   },
   description: {
     type: String,
-    required: true,
-    // min: [2, "Description must be 10 charcters long"]
+    // required: true,
+    min: [2, "Description must be 10 charcters long"]
   },
   category: {
     type: String
   },
-  meetup: [MeetUpSchema]
+  meetups: [MeetUpSchema]
 }, {timestamps: true})
 
 module.exports = {
@@ -43,3 +42,4 @@ module.exports = {
   
 
 }
+
