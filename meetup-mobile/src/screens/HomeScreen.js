@@ -17,7 +17,7 @@ class HomeScreen extends React.Component {
     meetupGroups: [],
   }
 
-  async componentDidMount() {
+  async componentWillMount() {
     this.setState({loading: true})
     const data = await axios
       .get('http://10.1.6.50:4000/groups/')

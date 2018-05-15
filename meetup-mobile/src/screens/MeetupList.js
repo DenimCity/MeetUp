@@ -13,11 +13,22 @@ const MeetupList = ({GroupInfo}) => {
         <ScrollView horizontal>
           {GroupInfo.map((group, i) => (
             <View key={i} style={styles.meetupCard}>
-              <View></View>
+
+              <View style={styles.meetupCardTopContainer}>
+                <Text>{group.name}</Text>
+              </View>
 
               <View style={styles.meetupCardBottomContainer}>
-                <Text>
-                  {group.name}
+                <Text style={styles.meetupCardName}>
+                  {group
+                    .meetups
+                    .map((meetup, i) => (
+                      <Text key={i}>{meetup.title}</Text>
+                    ))}
+
+                </Text>
+                <Text style={styles.meetupCardDate}>
+                  March 2m 6:00pm
                 </Text>
               </View>
 
@@ -34,17 +45,18 @@ const MeetupList = ({GroupInfo}) => {
 export default MeetupList;
 
 const styles = StyleSheet.create({
-  listContainer: {
-   
-  },
+  listContainer: {},
   titleContainer: {
     justifyContent: 'center',
     alignItems: 'center'
   },
-  title: {
-    
-    
-  },
+  title: {},
   contentContainer: {},
-  meetupCard: {}
+  meetupCard: {
+    height: 200,
+    width:175,
+    marginHorizontal: '1.5%',
+    backgroundColor: '#f73859'
+  },
+ 
 })
